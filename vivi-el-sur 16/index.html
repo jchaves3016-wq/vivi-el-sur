@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Viví el Sur — Caso UX y build · Jorgelina Chaves</title>
+<meta name="description" content="Qué pasa cuando repensás un proyecto de 2018 con lo que sabés hoy: una app para vivir el sur de la Argentina, diseñada por estación y llevada a código.">
+<meta name="theme-color" content="#140f1f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700&family=Comforter+Brush&family=Red+Hat+Display:wght@400..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add("js")</script>
+<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<script src="js/icons.js"></script>
+
+<header class="bar">
+  <a href="#top" class="bar__name">Jorgelina Chaves</a>
+  <span class="bar__tag">Laboratorio · Caso UX + build</span>
+</header>
+
+<main id="top">
+
+<!-- ============================ HERO ============================ -->
+<section class="hero" id="hero">
+  <div class="hero__sky" aria-hidden="true">
+    <span class="hero__sun" data-par="-.18"></span>
+    <svg class="hero__mnt hero__mnt--3" data-par="-.14" data-parx=".07" viewBox="0 0 1440 420" preserveAspectRatio="none"><path d="M0 260 130 160 240 230 380 80 500 200 620 130 740 220 880 60 1010 190 1120 120 1240 210 1350 140 1440 180V420H0Z"/></svg>
+    <svg class="hero__mnt hero__mnt--2" data-par="-.07" data-parx="-.05" viewBox="0 0 1440 420" preserveAspectRatio="none"><path d="M0 250 180 130 320 210 470 120 620 230 780 150 930 240 1090 140 1250 230 1440 160V420H0Z"/></svg>
+    <span class="hero__scrim"></span>
+    <svg class="hero__mnt hero__mnt--1" viewBox="0 0 1440 220" preserveAspectRatio="none"><path d="M0 130 150 70 290 120 460 50 640 130 810 80 990 140 1160 70 1310 120 1440 90V220H0Z"/></svg>
+  </div>
+  <div class="wrap hero__grid">
+    <div class="hero__copy">
+      <p class="eyebrow eyebrow--light rv">Repensar un proyecto de 2018</p>
+      <h1 class="hero__title rv">Viví<br>el Sur</h1>
+      <p class="hero__lead rv">Una app para planificar el viaje al sur de la Argentina y moverse por cada ciudad estando ahí. Diseñada por estación y llevada a código.</p>
+      <ul class="hero__tags rv"><li>App mobile</li><li>Diseño por estación</li><li>Figma → código → Flutter</li></ul>
+    </div>
+    <div class="hero__phones">
+      <div class="phone phone--img hero__ph hero__ph--l" data-par=".05" data-depth="-22" aria-hidden="true"><img src="assets/02-top10-experiencias.webp" alt=""></div>
+      <div class="phone phone--img hero__ph hero__ph--r" data-par=".09" data-depth="22" aria-hidden="true"><img src="assets/03-detalle-snowboard.webp" alt=""></div>
+      <div class="phone hero__ph hero__ph--c" data-par=".02"><div class="phone__in"><div class="app" id="heroApp" data-screen="home" data-slides data-nav></div></div></div>
+    </div>
+  </div>
+  <a class="hero__cue" href="#premisa"><span></span>Scroll</a>
+</section>
+
+<!-- ============================ PREMISA ============================ -->
+<section class="sec" id="premisa">
+  <div class="wrap">
+    <p class="eyebrow rv"><b>01</b>La premisa</p>
+    <p class="statement rv" data-words>En 2018, en la agencia, nos tomamos un tiempo para proponer una app para Bariloche. Hoy la repienso para cualquier persona que quiera vivir el sur de la Argentina.</p>
+    <dl class="meta rv">
+      <div><dt>Proyecto original</dt><dd>Propuesta para Emprotur, Bariloche · The8Agency<br>Fernanda Elicetche y Jorgelina Chaves</dd></div>
+      <div><dt>Rol</dt><dd>Diseño de producto, sistema visual y build del MVP en Flutter.</dd></div>
+      <div><dt>Alcance</dt><dd>Versión inicial para Bariloche y releases que suman puntos de interés turístico, hasta cubrir todo el sur.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ============================ DE 2018 A HOY ============================ -->
+<section class="sec sec--flush" id="origen">
+  <div class="wrap">
+    <header class="head head--split">
+      <div><p class="eyebrow rv"><b>02</b>De 2018 a hoy</p><h2 class="rv">El mismo producto, pensado para evolucionar.</h2></div>
+      <p class="lead rv">La estructura de información aguantó el paso del tiempo. Cambió todo lo demás: cómo entra el usuario, cuánto trabaja la fotografía y qué simplifica la interfaz por él.</p>
+    </header>
+    <div class="then">
+      <figure class="then__photo rv">
+        <img src="assets/00-origen-2018.webp" alt="La app original de 2018, con la identidad oficial de Bariloche" loading="lazy">
+        <figcaption><b>2018</b>Marca al centro, ranking sin temporada.</figcaption>
+      </figure>
+      <div class="cmp rv" id="cmp">
+        <div class="phone phone--img cmp__ph">
+          <img src="assets/01-inicio-buscador.webp" alt="Rediseño actual: inicio con foto, buscador y navegación">
+          <div class="cmp__old"><img src="assets/00b-pantalla-2018.webp" alt="Pantalla original de 2018"></div>
+          <div class="cmp__line"><span><svg class="ic" viewBox="0 0 24 24"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span></div>
+          <input class="cmp__range" type="range" min="0" max="100" value="50" aria-label="Comparar la versión de 2018 con el rediseño">
+        </div>
+        <p class="cmp__cap"><span>2018</span><span>Arrastrá para comparar</span><span>Hoy</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ DECISIONES ============================ -->
+<section class="sec" id="decisiones">
+  <div class="wrap">
+    <header class="head"><p class="eyebrow rv">Decisiones</p><h2 class="rv">El contexto del viaje decide la interfaz.</h2></header>
+
+    <div class="plates">
+      <!-- 01 · La estación manda -->
+      <article class="plate rv">
+        <div class="stage stage--season stage--fotos" id="stageSeason" data-season="invierno">
+          <div class="sc sc--season" aria-hidden="true">
+            <div class="sc__fotos" data-depth="-8"><i data-s="invierno" style="background-image:url(assets/bg-est-invierno.webp)"></i><i data-s="primavera" style="background-image:url(assets/bg-est-primavera.webp)"></i><i data-s="verano" style="background-image:url(assets/bg-est-verano.webp)"></i><i data-s="otono" style="background-image:url(assets/bg-est-otono.webp)"></i></div>
+            <span class="sc__sun" data-depth="14"></span>
+            <svg class="sc__m" data-depth="6" viewBox="0 0 600 400" preserveAspectRatio="none"><path class="m1" d="M-20 260 110 110 200 190 320 30 430 160 520 80 620 150V400H-20Z"/><path class="sn" d="M320 30 292 70 306 64 320 78 336 62 350 70ZM110 110 88 140 100 136 112 148 124 136 134 142ZM520 80 498 108 512 104 522 116 534 104 544 110Z"/></svg>
+            <svg class="sc__m" data-depth="12" viewBox="0 0 600 400" preserveAspectRatio="none"><path class="m2" d="M-20 300 140 210 250 270 380 190 500 280 620 230V400H-20Z"/></svg>
+            <div class="sc__fx"></div>
+          </div>
+          <div class="seg stage__ui" role="group" aria-label="Elegí una estación">
+            <button data-season="invierno" class="is-on">Invierno</button><button data-season="primavera">Primavera</button><button data-season="verano">Verano</button><button data-season="otono">Otoño</button>
+          </div>
+          <div class="stage__phone"><div class="phone"><div class="phone__in"><div class="app" id="seasonApp" data-screen="home" data-scroll="716" data-nav></div></div></div></div>
+        </div>
+        <div class="dcopy">
+          <p class="dcopy__n">01</p>
+          <h3>La estación manda</h3>
+          <p class="dcopy__live"><span id="seasonName">Invierno</span>: <em id="seasonSub">nieve y esquí.</em></p>
+          <p>El sur no es un destino, son varios según el mes. La home no ordena por categoría sino por estación, y todo lo que viene abajo se reordena detrás de esa elección.</p>
+          <p class="note">Hay épocas en las que un lugar es mucho más interesante que en otras.</p>
+        </div>
+      </article>
+
+      <!-- 02 · El buscador simplificado -->
+      <article class="plate plate--flip rv">
+        <div class="stage stage--search" id="stageSearch">
+          <div class="sc sc--bg" aria-hidden="true" data-depth="-6"></div>
+          <div class="seg seg--dark stage__ui" id="searchModes" role="group" aria-label="Modos del buscador">
+            <button data-ch="voice" class="is-on">Por voz</button><button data-ch="ia">Con tus palabras</button><button data-ch="steps">Paso a paso</button>
+          </div>
+          <div class="stage__phone"><div class="phone phone--window"><div class="phone__in"><div class="app" id="searchApp" data-screen="home" data-nav></div></div></div></div>
+        </div>
+        <div class="dcopy">
+          <p class="dcopy__n">02</p>
+          <h3>El buscador simplificado</h3>
+          <p>Encontrá tu lugar en el Sur con una interfaz fluida que te guía paso a paso, usando filtros, texto libre con IA o solamente con tu voz.</p>
+          <p class="dcopy__hint">La demo corre sola y también se puede tocar. En este prototipo la IA y la voz están simuladas.</p>
+        </div>
+      </article>
+
+      <!-- 03 · La foto hace el trabajo -->
+      <article class="plate rv">
+        <div class="stage stage--photo" id="stagePhoto">
+          <div class="sc sc--photo" aria-hidden="true"><i id="photoBg" style="background-image:url(assets/ph-snowboard.webp)"></i><i id="photoBg2"></i></div>
+          <div class="chips stage__ui">
+            <button class="glass" aria-pressed="false" data-id="snowboard" data-depth="26"><b>#1</b><span>Snowboard<small>Cerro Catedral</small></span><svg class="ic" viewBox="0 0 24 24"><use href="#i-bookmark"/></svg></button>
+            <button class="glass" aria-pressed="false" data-id="parapente" data-depth="-20"><b>#2</b><span>Parapente<small>Cerro Otto</small></span><svg class="ic" viewBox="0 0 24 24"><use href="#i-bookmark"/></svg></button>
+            <button class="glass" aria-pressed="false" data-id="kayak" data-depth="32"><b>#3</b><span>Kayak<small>Lago Nahuel Huapi</small></span><svg class="ic" viewBox="0 0 24 24"><use href="#i-bookmark"/></svg></button>
+          </div>
+          <div class="stage__phone"><div class="phone"><div class="phone__in"><div class="app" id="tourApp" data-screen="top" data-nav></div></div></div></div>
+        </div>
+        <div class="dcopy">
+          <p class="dcopy__n">03</p>
+          <h3>La foto hace el trabajo</h3>
+          <p>En turismo, la decisión es emocional antes que racional. Foto real a todo el ancho de la tarjeta, el puesto en una placa mínima y el puntaje al costado.</p>
+          <p class="note">Feature: un marcador para armar el viaje de a poco, guardando actividades en “Mi lista”. <b><span id="wishCount">0</span> <span id="wishWord">guardadas</span>.</b></p>
+        </div>
+      </article>
+
+      <!-- 04 · Sin señal -->
+      <article class="plate plate--flip rv">
+        <div class="stage stage--map" id="stageMap">
+          <div class="sc sc--map" aria-hidden="true">
+            <svg data-depth="8" viewBox="0 0 600 640" preserveAspectRatio="xMidYMid slice">
+              <path d="M330 0C300 120 360 230 460 270 540 300 620 290 620 290V0Z" fill="#92C6DE"/>
+              <g fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-dasharray="1 15"><path class="road" d="M-10 440C120 415 220 460 330 425S520 410 610 435"/><path class="road" d="M190 650C200 560 170 500 200 430"/><path class="road" d="M430 650c-20-80 10-150-10-222"/></g>
+              <g class="pois" fill="#A9BF9A" stroke="#7FA4D8" stroke-width="2" fill-opacity=".8"><circle cx="90" cy="150" r="30"/><circle cx="60" cy="320" r="26"/><circle cx="545" cy="410" r="30"/><circle cx="520" cy="560" r="22"/></g>
+              <g fill="#8FAE7C"><circle cx="120" cy="500" r="6"/><circle cx="300" cy="590" r="6"/><circle cx="480" cy="520" r="6"/><circle cx="40" cy="580" r="6"/><circle cx="350" cy="520" r="6"/></g>
+            </svg>
+          </div>
+          <button class="switch stage__ui" id="signal" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24"><use href="#i-signal"/></svg><span>Con señal</span><i></i></button>
+          <div class="stage__phone"><div class="phone"><div class="phone__in"><div class="app" id="mapApp" data-screen="map" data-nav></div></div></div></div>
+        </div>
+        <div class="dcopy">
+          <p class="dcopy__n">04</p>
+          <h3>Diseñado para quedarse sin señal</h3>
+          <p>Arriba del cerro no hay datos. El mapa se pensó descargable desde el principio: pocos elementos por vista e íconos legibles a tamaño chico.</p>
+          <p class="note">Una limitación de contexto convertida en criterio de diseño y usabilidad.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ ESTRATEGIA ============================ -->
+<section class="sec sec--flush" id="alcance">
+  <div class="wrap">
+    <header class="head head--split">
+      <div><p class="eyebrow rv"><b>04</b>Estrategia por fases</p><h2 class="rv">Empieza en Bariloche. Escala a todo el sur.</h2></div>
+      <p class="lead rv">Validar en Bariloche, extender al corredor vecino y recién después escalar a toda la Patagonia.</p>
+    </header>
+    <ol class="route rv" id="route">
+      <li class="is-now" tabindex="0"><span>Fase 1</span><h3>MVP · Bariloche</h3><p>Validar el producto en una plaza de alta densidad turística, con un catálogo base de prestadores locales.</p><dl><dt>Qué se valida</dt><dd>Retención durante el viaje, uso en terreno y modelo de comisiones.</dd></dl></li>
+      <li tabindex="0"><span>Fase 2</span><h3>Corredor de los Lagos</h3><p>Sumar Villa La Angostura, San Martín de los Andes, El Bolsón y Dina Huapi.</p><dl><dt>Qué habilita</dt><dd>Itinerarios entre ciudades, geolocalización y mapas offline.</dd></dl></li>
+      <li tabindex="0"><span>Fase 3</span><h3>Patagonia</h3><p>Incorporar El Calafate, Ushuaia, Puerto Madryn y Carretera Austral.</p><dl><dt>Qué habilita</dt><dd>Recomendación por perfil y clima, y una línea B2B con entes turísticos y aerolíneas.</dd></dl></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============================ BUILD ============================ -->
+<section class="sec sec--night" id="build">
+  <div class="wrap">
+    <header class="head head--split">
+      <div><p class="eyebrow eyebrow--rose rv"><b>05</b>Build</p><h2 class="rv">Un paso más allá del diseño.</h2></div>
+      <p class="lead rv">Un poco de los avances que estoy haciendo en el build del MVP, en Flutter.</p>
+    </header>
+
+    <div class="lab rv" id="lab">
+      <div class="lab__stage">
+        <div class="phone phone--lab"><div class="phone__in"><div class="app" id="labApp" data-screen="home" data-slides data-slide="1" data-nav></div></div></div>
+        <div class="lab__tabs" role="tablist" aria-label="Pantallas">
+          <button role="tab" data-go="home" class="is-on">Inicio</button>
+          <button role="tab" data-go="search">Buscador</button>
+          <button role="tab" data-go="top">Top 10</button>
+          <button role="tab" data-go="detail:snowboard">Detalle</button>
+          <button role="tab" data-go="map">Mapa</button>
+          <button role="tab" data-go="wish">Mi lista</button>
+        </div>
+      </div>
+      <aside class="lab__panel">
+        <div class="lab__modes" role="tablist" aria-label="Qué ver">
+          <button role="tab" data-mode="comp" class="is-on">Componentes</button>
+          <button role="tab" data-mode="tokens">Tokens</button>
+          <button role="tab" data-mode="flutter">Flutter</button>
+        </div>
+
+        <div class="lab__pane is-on" data-pane="comp">
+          <h3 id="labName">Componente</h3>
+          <p id="labDesc">Pasá el cursor por la pantalla para ver cada componente.</p>
+          <pre class="code" id="labCode" tabindex="0"><code>/* css/app.css */</code></pre>
+        </div>
+
+        <div class="lab__pane" data-pane="tokens">
+          <h3>Los mismos nombres en Figma, CSS y Dart</h3>
+          <p>Tocá un color para ver su variable. Abajo, cambiá el primario: se actualizan todas las pantallas de la página.</p>
+          <div class="swatches" id="swatches"></div>
+          <pre class="code" id="tokenCode"><code></code></pre>
+          <div class="tweak"><span>Primario</span>
+            <div class="tweak__opts" id="tweak">
+              <button style="--c:#4A80E6;--d:#325FBF" class="is-on" aria-label="Azul original"></button>
+              <button style="--c:#2F8F6B;--d:#226B50" aria-label="Verde bosque"></button>
+              <button style="--c:#D9683C;--d:#AC4E2A" aria-label="Naranja atardecer"></button>
+              <button style="--c:#5B4FC9;--d:#40379A" aria-label="Violeta"></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="lab__pane" data-pane="flutter">
+          <h3>La base del MVP</h3>
+          <p>Versión inicial, Bariloche: estación, Top 10, detalle y Mi lista.</p>
+          <div class="dart__tabs" role="tablist" aria-label="Archivos">
+            <button role="tab" class="is-on" data-file="tokens">tokens.dart</button>
+            <button role="tab" data-file="state">app_state.dart</button>
+            <button role="tab" data-file="save">save_button.dart</button>
+            <button role="tab" data-file="search">search_query.dart</button>
+          </div>
+          <pre class="code" id="dartCode" tabindex="0"><code></code></pre>
+        </div>
+      </aside>
+    </div>
+
+    <div class="vids rv">
+      <figure class="vid"><button class="vid__play" aria-label="Reproducir: De tokens a código"><video src="process/01-tokens-a-codigo.mp4" poster="process/01-tokens-a-codigo.jpg" muted playsinline preload="none"></video><i></i></button><button class="vid__big" aria-label="Agrandar video"><svg class="ic" viewBox="0 0 24 24"><path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5"/></svg>Agrandar</button><figcaption><b>01</b>De tokens a código</figcaption></figure>
+      <figure class="vid"><button class="vid__play" aria-label="Reproducir: La lista de guardados en Flutter"><video src="process/02-wishlist-flutter.mp4" poster="process/02-wishlist-flutter.jpg" muted playsinline preload="none"></video><i></i></button><button class="vid__big" aria-label="Agrandar video"><svg class="ic" viewBox="0 0 24 24"><path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5"/></svg>Agrandar</button><figcaption><b>02</b>La lista de guardados en Flutter</figcaption></figure>
+      <figure class="vid"><button class="vid__play" aria-label="Reproducir: El prototipo funcionando"><video src="process/03-prototipo.mp4" poster="process/03-prototipo.jpg" muted playsinline preload="none"></video><i></i></button><button class="vid__big" aria-label="Agrandar video"><svg class="ic" viewBox="0 0 24 24"><path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5"/></svg>Agrandar</button><figcaption><b>03</b>El prototipo funcionando</figcaption></figure>
+    </div>
+    <p class="vids__note">01 y 02 reproducen el código del repositorio; 03 es una grabación del prototipo.</p>
+  </div>
+</section>
+
+<!-- ============================ PANTALLAS ============================ -->
+<section class="wall" id="pantallas" aria-label="Las pantallas del rediseño">
+  <div class="wall__row"><figure><div class="wall__ph"><img src="assets/01-inicio-buscador.webp" alt="Inicio con buscador" loading="lazy"></div><figcaption><b>01</b>Inicio · buscador</figcaption></figure><figure><div class="wall__ph"><img src="assets/02-top10-experiencias.webp" alt="Top 10 experiencias" loading="lazy"></div><figcaption><b>02</b>Top 10 experiencias</figcaption></figure><figure><div class="wall__ph"><img src="assets/03-detalle-snowboard.webp" alt="Detalle de snowboard" loading="lazy"></div><figcaption><b>03</b>Detalle · snowboard</figcaption></figure><figure><div class="wall__ph"><img src="assets/04-mapa-interactivo.webp" alt="Mapa interactivo" loading="lazy"></div><figcaption><b>04</b>Mapa interactivo</figcaption></figure><figure><div class="wall__ph"><img src="assets/06-planea-tu-viaje.webp" alt="Planeá tu viaje" loading="lazy"></div><figcaption><b>05</b>Planeá tu viaje</figcaption></figure><figure><div class="wall__ph"><img src="assets/07-near-me.webp" alt="Near me" loading="lazy"></div><figcaption><b>06</b>Near me</figcaption></figure><figure><div class="wall__ph"><img src="assets/08-listado-hoteles.webp" alt="Listado de alojamientos" loading="lazy"></div><figcaption><b>07</b>Listado · alojamiento</figcaption></figure><figure><div class="wall__ph"><img src="assets/05-menu-lateral.webp" alt="Menú lateral" loading="lazy"></div><figcaption><b>08</b>Menú lateral</figcaption></figure></div>
+</section>
+
+</main>
+
+<dialog class="vbox" id="vbox" aria-label="Video ampliado">
+  <button class="vbox__x" aria-label="Cerrar"><svg class="ic" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <video controls playsinline></video>
+  <p class="vbox__cap"></p>
+</dialog>
+
+<footer class="foot" id="contacto">
+  <div class="wrap">
+    <div class="foot__copy">
+      <p class="eyebrow">Sobre mí</p>
+      <h2>Jorgelina Chaves</h2>
+      <p>Diseño, construyo y lidero con enfoque hands-on. Combino estrategia de negocio, diseño e IA para transformar problemas complejos en soluciones que conectan con la gente.</p>
+      <div class="foot__btns">
+        <a class="btn btn--dark" href="https://calendly.com/jchaves3016/30min" target="_blank" rel="noopener">Agendar llamada</a>
+        <a class="btn" href="https://www.linkedin.com/in/jorgelina-chaves-19790a1b/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://wa.me/5491159472861" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="btn" href="mailto:jchaves3016@gmail.com">Mail</a>
+      </div>
+    </div>
+    <div class="foot__base"><span>© 2026 Jorgelina Chaves</span><span>Buenos Aires, Argentina</span></div>
+  </div>
+</footer>
+
+<script src="js/dart-snippets.js"></script>
+<script src="js/app.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

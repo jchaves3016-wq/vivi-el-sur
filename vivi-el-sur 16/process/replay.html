@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Viví el Sur — reproducción del código</title>
+<!--
+  Herramienta de proceso. Reproduce, tecla por tecla, código real del repositorio
+  junto a una vista previa que se actualiza en vivo. Se usa para grabar los videos
+  de la sección "Cómo lo codeamos".
+    replay.html?v=1  →  De tokens a código (css/app.css)
+    replay.html?v=2  →  La lista de guardados en Flutter (flutter_app/lib)
+-->
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700&family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body { display: grid; grid-template-rows: 46px 1fr; background: #0D0914; color: #D9D3E6; font: 400 14px/1.6 "Geist Mono", ui-monospace, Menlo, monospace; overflow: hidden; }
+  header { display: flex; align-items: center; gap: 14px; padding: 0 18px; border-bottom: 1px solid rgba(255, 255, 255, .08); font: 500 13px/1 "Geist", "Albert Sans", sans-serif; }
+  header i { width: 10px; height: 10px; border-radius: 50%; background: #F2AE7B; }
+  header b { font-weight: 500; color: #fff; }
+  header span { margin-left: auto; color: rgba(255, 255, 255, .5); }
+  main { display: grid; grid-template-columns: 1.12fr 1fr; min-height: 0; }
+  .ed { display: grid; grid-template-rows: 38px 1fr; min-height: 0; border-right: 1px solid rgba(255, 255, 255, .08); }
+  .ed__tab { display: flex; align-items: center; gap: 8px; padding: 0 18px; background: #151020; color: #fff; font-size: 12.5px; }
+  .ed__tab::before { content: ""; width: 8px; height: 8px; border-radius: 2px; background: #4A80E6; }
+  pre { margin: 0; padding: 18px 22px 120px; overflow: hidden; white-space: pre-wrap; word-break: break-word; font: inherit; font-size: 13.5px; }
+  .k { color: #F2AE7B; } .s { color: #A8D6A0; } .c { color: #7F7890; } .n { color: #9CC0FF; } .p { color: #E3B5E0; }
+  .caret { display: inline-block; width: 8px; height: 17px; margin-bottom: -3px; background: #F2AE7B; animation: bl 1s steps(2) infinite; }
+  @keyframes bl { 50% { opacity: 0; } }
+  .pv { position: relative; display: grid; grid-template-rows: 38px 1fr; min-height: 0; background: #F4EEE8; color: #1B1820; }
+  .pv__tab { display: flex; align-items: center; padding: 0 18px; background: #E9E1D9; font: 500 12.5px/1 "Geist", sans-serif; color: #55515C; }
+  .pv iframe { width: 100%; height: 100%; border: 0; }
+  .card { position: fixed; inset: 0; z-index: 10; display: grid; place-content: center; gap: 14px; background: linear-gradient(180deg, #140F1F, #2A1F3D 55%, #6E4A6B); color: #fff; text-align: center; transition: opacity .6s; }
+  .card small { font: 500 13px/1 "Geist Mono", monospace; letter-spacing: .14em; color: #F2AE7B; }
+  .card h1 { margin: 0; font: 500 64px/1 "Geist", sans-serif; letter-spacing: -.04em; }
+  .card p { margin: 0; font: 400 18px/1.4 "Albert Sans", sans-serif; color: rgba(255, 255, 255, .75); }
+  .card.is-out { opacity: 0; pointer-events: none; }
+  .cursor { position: fixed; z-index: 9; left: 0; top: 0; width: 22px; height: 22px; border-radius: 50%; background: rgba(27, 24, 32, .82); border: 2px solid #fff; box-shadow: 0 4px 12px rgba(0, 0, 0, .3); transform: translate(900px, 700px); transition: transform .7s cubic-bezier(.3, .7, .2, 1), scale .15s; opacity: 0; }
+  .cursor.is-on { opacity: 1; } .cursor.is-down { scale: .78; }
+</style>
+</head>
+<body>
+<header><i></i><b>Viví el Sur</b><em id="step" style="font-style:normal;color:rgba(255,255,255,.7)"></em><span id="file"></span></header>
+<main>
+  <section class="ed"><div class="ed__tab" id="tab"></div><pre id="code"></pre></section>
+  <section class="pv"><div class="pv__tab" id="pvtab">Vista previa</div><iframe id="pv" title="Vista previa"></iframe></section>
+</main>
+<div class="card" id="card"><small id="cardN"></small><h1 id="cardT"></h1><p id="cardP"></p></div>
+<div class="cursor" id="cursor"></div>
+
+<script>
+(async function () {
+  const v = new URLSearchParams(location.search).get('v') || '1';
+  const speed = +(new URLSearchParams(location.search).get('speed') || 1);
+  const $ = (id) => document.getElementById(id);
+  const wait = (ms) => new Promise((r) => setTimeout(r, ms / speed));
+  const esc = (t) => t.replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+  const get = async (u) => (await fetch(u)).text();
+
+  /* Resaltado mínimo ------------------------------------------------------ */
+  const hlCss = (t) => esc(t).split('\n').map((l) => {
+    if (/^\s*\/\*/.test(l) || /^\s*\*/.test(l)) return `<span class="c">${l}</span>`;
+    if (/[{]\s*$/.test(l) && !/:\s/.test(l.replace(/:[a-z-]+/g, ''))) return l.replace(/^([^{]+)/, '<span class="k">$1</span>');
+    return l.replace(/^(\s*)([\w-]+)(:)(.*?)(;?)$/, '$1<span class="n">$2</span>$3<span class="s">$4</span>$5');
+  }).join('\n');
+  const KW = /\b(import|class|abstract|final|static|const|extends|return|void|if|required|super|this|bool|int|String|Set|List|get|override)\b/g;
+  const hlDart = (t) => esc(t).split('\n').map((l) => /^\s*\/\//.test(l) ? `<span class="c">${l}</span>`
+    : l.replace(/('[^']*')/g, '\u0001$1\u0002').replace(KW, '<span class="k">$1</span>').replace(/\b([A-Z]\w+)(?=[.(<\s])/g, '<span class="p">$1</span>').replace(/\u0001/g, '<span class="s">').replace(/\u0002/g, '</span>')).join('\n');
+
+  /* Tipeo ----------------------------------------------------------------- */
+  const code = $('code');
+  async function type(text, hl, cps, onTick) {
+    let i = 0, acc = 0, last = performance.now();
+    return new Promise((done) => {
+      (function tick(now) {
+        acc += (now - last) / 1000 * cps * speed; last = now;
+        const n = Math.floor(acc); acc -= n; i = Math.min(text.length, i + n);
+        const shown = text.slice(0, i);
+        code.innerHTML = hl(shown) + '<span class="caret"></span>';
+        code.scrollTop = code.scrollHeight;
+        if (onTick && n) onTick(shown);
+        i < text.length ? requestAnimationFrame(tick) : done();
+      })(last);
+    });
+  }
+  async function title(n, t, p) { $('cardN').textContent = n; $('cardT').textContent = t; $('cardP').textContent = p; await wait(2200); $('card').classList.add('is-out'); await wait(700); }
+  const cursor = $('cursor');
+  async function clickIn(frame, sel, index = 0) {
+    const el = frame.contentDocument.querySelectorAll(sel)[index]; if (!el) return;
+    const fr = frame.getBoundingClientRect(), r = el.getBoundingClientRect();
+    cursor.classList.add('is-on');
+    cursor.style.transform = `translate(${fr.left + r.left + r.width / 2 - 11}px, ${fr.top + r.top + r.height / 2 - 11}px)`;
+    await wait(850); cursor.classList.add('is-down'); await wait(140); el.click(); cursor.classList.remove('is-down'); await wait(900);
+  }
+
+  /* ------------------------------------------------------------------ v=1 */
+  if (v === '1') {
+    const css = await get('../css/app.css');
+    const tokens = css.slice(css.indexOf('.app {'), css.indexOf('/* Espaciado */')).trimEnd() + '\n\n  /* Radios */\n  --radius-xl: 18px;\n  --radius-full: 999px;\n}\n';
+    const season = css.slice(css.indexOf('/* SeasonCard'), css.indexOf('/* RatingBadge'));
+    const text = '/* css/app.css — tokens tomados de Figma */\n' + tokens + '\n' + season.trimEnd() + '\n';
+    $('tab').textContent = 'css/app.css'; $('file').textContent = 'Figma → tokens → componente'; $('pvtab').textContent = 'Vista previa · se actualiza con cada línea';
+    const pv = $('pv');
+    pv.srcdoc = `<!doctype html><html><head><link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"><style>
+      body{margin:0;padding:34px 34px;background:#F4EEE8;font:400 13px/1.45 "Albert Sans",sans-serif;color:#212125}
+      h4{margin:0 0 14px;font:600 11px/1 "Albert Sans";letter-spacing:.12em;text-transform:uppercase;color:#75727C}
+      #sw{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;min-height:150px;margin-bottom:34px}
+      #sw div{font-size:11px;animation:in .35s both} #sw i{display:block;height:46px;border-radius:10px;border:1px solid rgba(0,0,0,.08);margin-bottom:6px}
+      @keyframes in{from{opacity:0;transform:translateY(8px)}}
+      .row{display:flex;gap:12px} button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-align:left}
+      .ic{fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round}
+    </style><style id="live"></style></head><body>
+      <h4>Tokens</h4><div id="sw"></div>
+      <h4>Season Card</h4>
+      <div class="app row">${[['invierno', 'Invierno', 'Nieve y esquí', 'se-invierno.webp', 1], ['primavera', 'Primavera', 'Flores y trekking', 'se-primavera.webp'], ['verano', 'Verano', 'Playas y kayak', 'se-verano.webp']].map(([k, a, b, img, on]) => `<button class="v-season v-season--${k} ${on ? 'is-on' : ''}"><img src="../assets/${img}" alt=""><b>${a}</b><small>${b}</small><i><svg class="ic" viewBox="0 0 24 24" stroke="#fff"><path d="M5 12.5l4.500 4.500L19 7.500"/></svg></i></button>`).join('')}</div>
+    </body></html>`;
+    await new Promise((r) => pv.addEventListener('load', r, { once: true }));
+    const live = pv.contentDocument.getElementById('live'), sw = pv.contentDocument.getElementById('sw');
+    let shownSw = 0;
+    await title('01', 'De tokens a código', 'Los colores de Figma pasan a variables. Con ellas se arma el componente.');
+    $('step').textContent = '· 01 De tokens a código';
+    await type(text, hlCss, 95, (t) => {
+      live.textContent = t;
+      const m = [...t.matchAll(/--color-([\w-]+): (#[0-9A-F]{6});/g)];
+      for (; shownSw < Math.min(m.length, 8); shownSw++) sw.insertAdjacentHTML('beforeend', `<div><i style="background:${m[shownSw][2]}"></i>${m[shownSw][1]}</div>`);
+    });
+    live.textContent = text;
+    await wait(700);
+    await clickIn(pv, '.v-season', 1); pv.contentDocument.querySelectorAll('.v-season').forEach((b, i) => b.classList.toggle('is-on', i === 1));
+    await wait(500);
+    await clickIn(pv, '.v-season', 2); pv.contentDocument.querySelectorAll('.v-season').forEach((b, i) => b.classList.toggle('is-on', i === 2));
+    await wait(1600);
+  }
+
+  /* ------------------------------------------------------------------ v=2 */
+  if (v === '2') {
+    const st = await get('../flutter_app/lib/state/app_state.dart');
+    const sb = await get('../flutter_app/lib/widgets/save_button.dart');
+    const part1 = st.slice(0, st.indexOf('/// Expone')).trimEnd() + '\n';
+    const part2 = sb;
+    $('file').textContent = 'Flutter · base del MVP'; $('pvtab').textContent = 'Prototipo web · el mismo estado, en el navegador';
+    const pv = $('pv'); pv.src = 'phone.html?screen=top';
+    await new Promise((r) => pv.addEventListener('load', r, { once: true }));
+    await title('02', 'La lista de guardados', 'Un estado, un botón y una pantalla: guardar actividades para armar el viaje.');
+    $('step').textContent = '· 02 La lista de guardados en Flutter';
+    $('tab').textContent = 'lib/state/app_state.dart';
+    await type(part1, hlDart, 110);
+    await wait(900);
+    $('tab').textContent = 'lib/widgets/save_button.dart';
+    await type(part2, hlDart, 120);
+    await wait(700);
+    await clickIn(pv, '.v-save', 0);
+    await clickIn(pv, '.v-save', 1);
+    await clickIn(pv, '.v-tab[data-to="wish"]');
+    await wait(900);
+    await clickIn(pv, '.s-wish__rm', 1);
+    await wait(1600);
+  }
+  window.__done = true;
+})();
+</script>
+</body>
+</html>
